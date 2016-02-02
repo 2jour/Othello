@@ -1,3 +1,3 @@
 # Othello
 
-Nothing to see yet :)
+T'is neither here nor there.
