@@ -1,0 +1,5 @@
+##############
+# FETCH API KEY FROM TRELLO
+##############
+KEY=<APIKEY>
+TOKEN=<TOKEN>
