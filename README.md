@@ -1,5 +1,12 @@
-# Othello
+# Othello - QA themed Trello board
 
-T'is neither here nor there.
+Creating a QA themed Trello board automagically to keep track of features or bugs
 
-Using the inspiration of Othello  ;), I am scripting out commands in bash to automate trello and to create themed boards like a Testboard :).
+* Each board represents a release or milestone
+
+* Labels determine states of bugs and features and can be customized https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
+
+* Lists group testing strategies and can be customized here https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
+
+
+
