@@ -12,7 +12,8 @@ Creating a QA themed Trello board automagically to keep track of features or bug
 
 ## Instructions
 
-1. Once you fetch your spiffy tokens at https://trello.com/app-key, you can add them here https://github.com/2jour/Othello/blob/master/token
-
-2. Call ```create_board.sh <Release Name> themes/testboard```
-3. Go to your trello release board and test away :)
+1. Create an account on trello and login
+2. Fetch your spiffy tokens at https://trello.com/app-key, you can add them here https://github.com/2jour/Othello/blob/master/token
+3. git clone https://github.com/2jour/Othello
+4. Call ```create_board.sh <Release Name> themes/testboard```
+5. Go to your trello release board and use your QA magic  :)
