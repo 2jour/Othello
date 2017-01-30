@@ -1,4 +1,4 @@
-# Othello - QA themed Trello board
+# Othello - Magical QA themed Trello board
 
 Creating a QA themed Trello board automagically to keep track of features or bugs
 
