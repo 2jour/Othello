@@ -15,6 +15,7 @@ function FetchFromResponse {
 }
 
 THEME=$2
+BOARDNAME=$1
 if [ ! -d  themes/$THEME ]; then
 	echo Sorry, theme $THEME not available for Othello.
 	exit 1
@@ -76,6 +77,6 @@ if [ ! -f ./lists ] ; then
 fi
 
 mkdir -p config
-cp ./lists config
+cp ./lists config/$BOARDNAME
 sed -i -e 's/<BOARDID>/'$BOARDID'/' ./config/lists 
 sed -i -e "s/<LISTID>/$LIST_IDS/" ./config/lists 
