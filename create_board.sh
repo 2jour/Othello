@@ -3,13 +3,16 @@
 # create_board.sh <Name of Board> <Theme>
 #
 #################
+set -ex
 MATCH=" "
 function FetchFromResponse {
+	local loc_error=$3
 	if [[ $1 =~ $2 ]]; then
 		echo MATCH="${BASH_REMATCH[1]}"
 		MATCH=${BASH_REMATCH[1]}
 	else
 		echo Error can not find match: Trello returned the following: "$1"
+		echo "$loc_error"
 		exit 1
 	fi
 }
@@ -33,7 +36,7 @@ RESPONSE=$(curl -X POST -H "Content-Type: application/json" "https://trello.com/
 
 BOARDIDURL=''
 
-FetchFromResponse $RESPONSE $regex 
+FetchFromResponse "$RESPONSE" $regex2 "ERROR issue creating BOARD $BOARDNAME" 
 BOARDIDURL=$MATCH
 
 
@@ -51,20 +54,19 @@ do
 done
 
 
-FetchFromResponse $RESPONSE $regex2 
+FetchFromResponse "$RESPONSE" $regex2 "ERROR creating labels for $BOARDNAME" 
 BOARDID=$MATCH
-echo '--- Creating Lists defined in config'
 echo ''
 echo ''
 
 LIST_IDS=""
 for x in $LISTS; do
+	echo "--- Creating List $x defined in config"
 
 	RESPONSE=$(curl -X POST -H "Content-Type: application/json" "https://trello.com/1/lists?key=$KEY&token=$TOKEN" -d '{  "name":"'$x'","idBoard":"'$BOARDID'" }')
-	FetchFromResponse $RESPONSE $regex2 
+	FetchFromResponse "$RESPONSE" $regex2 "ERROR LIST $x was not created. Please manually create $x for BOARD: $BOARDNAME" 
 	ID=$MATCH
 	LIST_IDS="$LIST_IDS $x:$ID" 
-	echo $RESPONSE
 done
 
 #REMOVE LEADING AND TRAILING SPACE
@@ -76,7 +78,7 @@ if [ ! -f ./lists ] ; then
 	exit 1
 fi
 
-mkdir -p config
-cp ./lists config/$BOARDNAME
-sed -i -e 's/<BOARDID>/'$BOARDID'/' ./config/lists 
-sed -i -e "s/<LISTID>/$LIST_IDS/" ./config/lists 
+mkdir -p $BOARDNAME
+cp ./lists $BOARDNAME/lists
+sed -i -e 's/<BOARDID>/'$BOARDID'/' ./$BOARDNAME/lists 
+sed -i -e "s/<LISTID>/$LIST_IDS/" ./$BOARDNAME/lists 
