@@ -82,5 +82,5 @@ cls_board_RESPONSE=$(curl -X PUT -H "Content-Type: application/json" "https://tr
 echo $cls_board_RESPONSE
 
 mkdir -p closed_boards/$cls_board_BOARD_NAME
-cp -f boards/$cls_board_BOARD_NAME/lists
+cp -f boards/$cls_board_BOARD_NAME/lists closed_boards/$cls_board_BOARD_NAME
 rm -rf boards/$cls_board_BOARD_NAME 
