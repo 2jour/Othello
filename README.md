@@ -20,7 +20,9 @@ Use these tools to create a QA themed Trello board automagically to keep track o
 5. Go to your trello release board and use your QA magic  :) as you play Xanadu in the background
 
 
+
+
 ## Tools
 
-close_board.sh -b <BOARDNAME>
+* ``` close_board.sh -b <BOARDNAME> ``` - Closes a board based on a BOARDNAME created by create_board.sh
 
