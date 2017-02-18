@@ -78,7 +78,7 @@ if [ ! -f ./lists ] ; then
 	exit 1
 fi
 
-mkdir -p $BOARDNAME
-cp ./lists $BOARDNAME/lists
-sed -i -e 's/<BOARDID>/'$BOARDID'/' ./$BOARDNAME/lists 
-sed -i -e "s/<LISTID>/$LIST_IDS/" ./$BOARDNAME/lists 
+mkdir -p boards/$BOARDNAME
+cp ./lists boards/$BOARDNAME/lists
+sed -i -e 's/<BOARDID>/'$BOARDID'/' ./boards/$BOARDNAME/lists 
+sed -i -e "s/<LISTID>/$LIST_IDS/" ./boards/$BOARDNAME/lists 
