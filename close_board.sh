@@ -1,6 +1,6 @@
 #######
 # NAME:
-# 	close_board.sh -b <BOARDNAME> -l
+# 	close_board.sh -b <Release Name> -l
 #
 ######
 function fn_cls_board_help_echo {
@@ -16,7 +16,7 @@ function fn_cls_board_help_echo {
 	echo ""
 	echo "	    -l - List boards created"
 	echo ""
-	echo "      -b - Board Name "
+	echo "      -b - Release Name "
 	echo "              create_board.sh creates a board name folder along with"
 	echo "              a file called list that contains the board id for that board."
 	echo               
