@@ -1,6 +1,6 @@
-# Othello - Magical QA themed Trello board
+# Othello - Magical QA themed Trello Tools 
 
-Creating a QA themed Trello board automagically to keep track of features or bugs
+Use these tools to create a QA themed Trello board automagically to keep track of features or bugs
 
 * Each board represents a release or milestone
 
@@ -18,3 +18,11 @@ Creating a QA themed Trello board automagically to keep track of features or bug
 3. Click on the token url on the trello page in step 2 to generate your token manually and add it here.
 4. Call ```create_board.sh <Release Name> themes/testboard```
 5. Go to your trello release board and use your QA magic  :) as you play Xanadu in the background
+
+
+
+
+## Tools
+
+* ``` close_board.sh -b <Release Name> ``` - Closes a board based on a Release Name created by create_board.sh
+
