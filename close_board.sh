@@ -3,6 +3,7 @@
 # 	close_board.sh -b <Release Name> -l
 #
 ######
+
 function fn_cls_board_help_echo {
 	clear
 	echo "------------------------------------------"
@@ -14,7 +15,7 @@ function fn_cls_board_help_echo {
 	echo ""
 	echo "      -h - Help"
 	echo ""
-	echo "	    -l - List boards created"
+	echo "      -l - List boards created"
 	echo ""
 	echo "      -b - Release Name "
 	echo "              create_board.sh creates a board name folder along with"
@@ -29,16 +30,15 @@ function fn_cls_board_help_echo {
 
 cls_board_BOARD_NAME=
 
-# FETCHING PARAMETERS
+# -- FETCHING PARAMETERS
+
 if [[ -z $@ ]]; then
 	fn_cls_board_help_echo
 	exit 1
 fi
 
-echo $#
 while [[ $# -gt 0 ]]; do
 	parm="$1"
-	echo $1
 	case $parm in
 		-h) 
 		fn_cls_board_help_echo
@@ -64,7 +64,8 @@ shift
 done
 
 
-# --- Fetching Board ID 
+# --- FETCHING BOARD ID 
+
 if [ ! -f boards/$cls_board_BOARD_NAME/lists ] ; then
 	echo "-E- boards/$cls_board_BOARD_NAME/lists does not exist"
 	exit 1
@@ -72,7 +73,9 @@ fi
 
 source boards/$cls_board_BOARD_NAME/lists
 source token
-echo $BOARDID
+
+
+# --- CLOSING BOARD 
 
 echo "-I- Closing Board: $cls_board_BOARD_NAME"
 echo
@@ -80,6 +83,8 @@ echo
 cls_board_RESPONSE=$(curl -X PUT -H "Content-Type: application/json" "https://trello.com/1/boards/$BOARDID/closed?key=$KEY&token=$TOKEN" -d '{  "value":true }')
 
 echo $cls_board_RESPONSE
+
+# -- MOVING TO CLOSED BOARD DIRECTORY
 
 mkdir -p closed_boards/$cls_board_BOARD_NAME
 cp -f boards/$cls_board_BOARD_NAME/lists closed_boards/$cls_board_BOARD_NAME
