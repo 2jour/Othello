@@ -77,7 +77,7 @@ source common_functions
 
 echo "-I- Fetching List Id"
 echo 
-arch_card_LISTID=$(fn_common_fns_fetch_list_id $arch_card_LIST_NAME "$LISTID") 
+arch_card_LISTID=$(fn_common_fns_fetch_list_id $arch_card_LIST_NAME "$GLOB_LISTS_LISTID") 
 
 
 echo "-I- Archiving cards for LIST $arch_card_LIST_NAME : $arch_card_LISTID"

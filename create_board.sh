@@ -25,19 +25,6 @@ function fn_create_board_help_echo {
 
 }
 
-glob_create_board_MATCH=" "
-
-function fn_create_board_fetch_from_response {
-	local loc_error=$3
-	if [[ $1 =~ $2 ]]; then
-		echo MATCH="${BASH_REMATCH[1]}"
-		glob_create_board_MATCH=${BASH_REMATCH[1]}
-	else
-		echo Error can not find match: Trello returned the following: "$1"
-		echo "$loc_error"
-		exit 1
-	fi
-}
 
 create_board_BOARDNAME=
 create_board_THEME=
@@ -49,10 +36,8 @@ if [[ -z $@ ]]; then
         exit 1
 fi
 
-echo $#
 while [[ $# -gt 0 ]]; do
         parm="$1"
-        echo $1
         case $parm in
                 -h)
                 fn_create_board_help_echo
@@ -74,14 +59,18 @@ esac
 shift
 done
 
+if [[ -z $create_board_BOARDNAME ]] || [[ -z $create_board_THEME ]] then ;
+	fn_create_board_help_echo
+	exit 1
+fi
 
 
-
-if [ ! -d  themes/$create_board_THEME ]; then
+if [ ! -e  themes/$create_board_THEME ]; then
 	echo Sorry, theme $create_board_THEME not available for Othello.
 	exit 1
 fi
 
+source common_functions
 source token
 source themes/$create_board_THEME/config_board
 
@@ -94,9 +83,9 @@ RESPONSE=$(curl -X POST -H "Content-Type: application/json" "https://trello.com/
 
 BOARDIDURL=''
 
-fn_create_board_fetch_from_response "$RESPONSE" $regex2 "ERROR issue creating BOARD $create_board_BOARDNAME" 
+create_board_MATCH=$(fn_common_fns_fetch_from_response "$RESPONSE" $regex2 "ERROR issue creating BOARD $create_board_BOARDNAME") 
 
-BOARDIDURL=$glob_create_board_MATCH
+BOARDIDURL=$create_board_MATCH
 
 
 echo '--- Creating Labels defined in config_board'
@@ -116,9 +105,9 @@ do
 done
 
 
-fn_create_board_fetch_from_response "$RESPONSE" $regex2 "ERROR creating labels for $create_board_BOARDNAME" 
+create_board_MATCH=$(fn_common_fns_fetch_from_response "$RESPONSE" $regex2 "ERROR creating labels for $create_board_BOARDNAME") 
 
-BOARDID=$glob_create_board_MATCH
+BOARDID=$create_board_MATCH
 
 echo ''
 echo ''
@@ -128,8 +117,10 @@ for x in $LISTS; do
 	echo "--- Creating List $x defined in config"
 
 	RESPONSE=$(curl -X POST -H "Content-Type: application/json" "https://trello.com/1/lists?key=$KEY&token=$TOKEN" -d '{  "name":"'$x'","idBoard":"'$BOARDID'" }')
-	fn_create_board_fetch_from_response "$RESPONSE" $regex2 "ERROR LIST $x was not created. Please manually create $x for BOARD: $create_board_BOARDNAME" 
-	ID=$glob_create_board_MATCH
+
+	create_board_MATCH=$(fn_common_fns_fetch_from_response "$RESPONSE" $regex2 "ERROR LIST $x was not created. Please manually create $x for BOARD: $create_board_BOARDNAME") 
+
+	ID=$create_board_MATCH
 	LIST_IDS="$LIST_IDS $x:$ID" 
 done
 

@@ -80,7 +80,7 @@ source token
 echo "-I- Closing Board: $cls_board_BOARD_NAME"
 echo
 
-cls_board_RESPONSE=$(curl -X PUT -H "Content-Type: application/json" "https://trello.com/1/boards/$BOARDID/closed?key=$KEY&token=$TOKEN" -d '{  "value":true }')
+cls_board_RESPONSE=$(curl -X PUT -H "Content-Type: application/json" "https://trello.com/1/boards/$GLOB_LISTS_BOARDID/closed?key=$KEY&token=$TOKEN" -d '{  "value":true }')
 
 echo $cls_board_RESPONSE
 
