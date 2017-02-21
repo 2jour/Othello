@@ -12,3 +12,5 @@ Here you will describe the test plan and the setup.
 
 #[ ] Tester
 	-[ ] Bob Lipton Bob
+
+#[ ] Bugs Logged - List all bugs logged against test plan

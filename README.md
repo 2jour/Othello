@@ -4,9 +4,12 @@ Use these tools to create a QA themed Trello board automagically to keep track o
 
 * Each board represents a release or milestone
 
-* Labels determine states of bugs and features and can be customized https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
+* Lists categorizes test plans and can be customized here https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
 
-* Lists group testing strategies and can be customized here https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
+* Card describes a test plan
+
+* Labels determine state of the test plan and can be customized https://github.com/2jour/Othello/blob/master/themes/testboard/config_board
+
 
 
 
