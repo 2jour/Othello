@@ -25,4 +25,5 @@ Use these tools to create a QA themed Trello board automagically to keep track o
 ## Tools
 
 * ``` close_board.sh -b <Release Name> ``` - Closes a board based on a Release Name created by create_board.sh
+* ``` archive_all_cards.sh -b <Release Name> -l <List Name``` - Archives cards for all cards of a given release for a give list name
 
