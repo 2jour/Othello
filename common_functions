@@ -1,0 +1,33 @@
+#
+# Name: fn_common_fns_fetch_list_id
+# Purpose:
+# FETCHES LISTID ARRAY FROM LIST ARRAY FROM THE board/<RELEASE>lists file
+# FORMAT: "<LIST NAME 1>:<LIST ID 1> <LIST NAME 2>:<LIST ID 2>" >:<LIST ID 2> ..."
+#
+# Parm : <list_name> <list_array> 
+#
+function fn_common_fns_fetch_list_id {
+        local loc_list_name=$1
+        local loc_list_array=$2
+
+	if [[ -z $loc_list_array ]]  ; then
+		echo "-E- board/<RELEASE>/lists malformed. LISTID is missing"	
+		exit 1
+	fi
+
+        for each_list in $loc_list_array ; do
+		local loc_each_list_name=$(echo $each_list | cut  -d':' -f1)		
+		local loc_each_list_id=$(echo $each_list | cut -d':' -f2)		
+
+		if [[ $loc_each_list_name = $loc_list_name ]]; then
+			echo $loc_each_list_id
+			exit 0
+		fi
+        done
+	echo	
+	echo "-E- List Name $loc_list_name Does Not Exist"
+	echo	
+	echo "--- Existing List Names >>  $loc_list_array"
+	echo
+	exit 1
+}
