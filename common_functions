@@ -1,3 +1,5 @@
+set -e
+
 #
 # Name: fn_common_fns_fetch_list_id
 # Purpose:
@@ -50,4 +52,16 @@ function fn_common_fns_fetch_from_response {
 		echo "$loc_error"
 		exit 1
 	fi
+}
+
+
+#
+# Name: fn_common_list_boards
+# Purpose:
+# list boards created by create_board.sh 
+#
+#
+function fn_common_fns_list_boards {
+	echo " -- List of Boards -- "
+	ls boards
 }

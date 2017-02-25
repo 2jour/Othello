@@ -3,6 +3,8 @@
 # 	close_board.sh -b <Release Name> -l
 #
 ######
+set -e
+source common_functions
 
 function fn_cls_board_help_echo {
 	clear
@@ -15,7 +17,7 @@ function fn_cls_board_help_echo {
 	echo ""
 	echo "      -h - Help"
 	echo ""
-	echo "      -l - List boards created"
+	echo "      -ll - List boards created"
 	echo ""
 	echo "      -b - Release Name "
 	echo "              create_board.sh creates a board name folder along with"
@@ -49,9 +51,8 @@ while [[ $# -gt 0 ]]; do
 		cls_board_BOARD_NAME="$2"
 		shift
 		;;
-		-l)
-		echo " -- List of Boards -- "
-		ls boards
+		-ll)
+		fn_common_fns_list_boards
 		echo
 		exit 0
 		shift

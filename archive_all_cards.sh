@@ -4,6 +4,7 @@
 #
 ######
 set -e
+source common_functions
 
 function fn_arch_card_help_echo {
         clear
@@ -15,6 +16,7 @@ function fn_arch_card_help_echo {
         echo "      Archives all cards cards for a given list"
         echo ""
         echo "      -h - Help"
+        echo "      -ll - List Board Names"
         echo ""
         echo "      -l - List Name where cards are to be archived"
         echo ""
@@ -26,7 +28,6 @@ function fn_arch_card_help_echo {
 
 }
 
-
 arch_card_BOARD_NAME=
 arch_card_LIST_NAME=
 
@@ -35,11 +36,17 @@ if [[ -z $@ ]]; then
         exit 1
 fi
 
+
 while [[ $# -gt 0 ]]; do
         parm="$1"
         case $parm in
                 -h)
                 fn_arch_card_help_echo
+                exit 0
+                shift
+                ;;
+                -ll)
+		fn_common_fns_list_boards
                 exit 0
                 shift
                 ;;
@@ -73,7 +80,6 @@ fi
 
 source boards/$arch_card_BOARD_NAME/lists
 source token
-source common_functions
 
 echo "-I- Fetching List Id"
 echo 
