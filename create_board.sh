@@ -59,7 +59,7 @@ esac
 shift
 done
 
-if [[ -z $create_board_BOARDNAME ]] || [[ -z $create_board_THEME ]] then ;
+if [[ -z $create_board_BOARDNAME ]] || [[ -z $create_board_THEME ]]; then 
 	fn_create_board_help_echo
 	exit 1
 fi
